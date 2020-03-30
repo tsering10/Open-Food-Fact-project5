@@ -24,7 +24,7 @@ class Download_data():
             url_base = 'https://fr.openfoodfacts.org/categorie'
             url_end = 'json'
             url = "{}/{}.{}".format(url_base,category,url_end)
-            # make a request to the url 
+            # make  request to the url 
             response = requests.get(url)
             products = response.json()
             time.sleep(1)
@@ -74,15 +74,15 @@ class Download_data():
         dir = os.path.join(cwd,"open_food_data")
         if os.path.exists(dir):
                 print(dir + ' : exists and saving the file as open_food_data.csv')
-                # saving the the final consulation file as csv file 
-                df.to_csv(dir+'/open_food_data.csv',index=False)
+                # saving the file as a csv file 
+                df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8')
 
         else:
             os.mkdir(dir)
             #print(os.getcwd)
-            # saving the the final consulation file as csv file 
+            # saving the file as csv file 
             print('saving the data as open_food_data.csv')
-            df.to_csv(dir+'/open_food_data.csv',index=False)
+            df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8')
 
 
 
