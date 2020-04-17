@@ -7,6 +7,9 @@ from tqdm import tqdm
 import math
 import time
 import os 
+import numpy as np
+from datetime import datetime
+
 from constants import *
 
 
@@ -61,14 +64,26 @@ class Download_data():
                     res['last_modified_t'] = products['products'][i].get('last_modified_t')
                     # append the dictionary to a list 
                     data.append(res)
-        return data
-    
-    
-    def save_dataframe_csv(self,data):
-        """save the dataframe as a csv file"""
-        #create dataframe
+        
+        
+         # create a dataframe 
         df = pd.DataFrame(data)
 
+        # Change unix timestamp to human-readable date
+        df['last_modified_t'] = pd.to_datetime(df['last_modified_t'],unit='s').dt.strftime('%Y-%m-%d')
+
+        #change all NaN-values to None
+
+        df = df.where((pd.notnull(df)), None)
+
+        return df 
+        
+        
+        #return data
+    
+    def save_dataframe_csv(self,df):
+        """save the dataframe as a csv file"""
+        
         # get the current directory
         cwd = os.getcwd()
         dir = os.path.join(cwd,"open_food_data")

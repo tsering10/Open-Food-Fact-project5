@@ -3,7 +3,6 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
 import sqlalchemy
 from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database
 
 
 
@@ -11,7 +10,7 @@ def connect():
     """ Connect to MySQL database """
     db_config = read_db_config()
     dbName = 'test'
-    conn = None
+    #conn = None
     
     
     try:
@@ -30,8 +29,8 @@ def connect():
 
         if db_engine.connect():
             print('Connection established')
-            conn = db_engine.connect()
-            return conn
+            #conn = db_engine.connect()
+            return db_engine
         else:
             print('Connection Failed')
 
