@@ -1,4 +1,5 @@
 CATEGORIES_LIST = [
-    'Chips et frites',
-    'Soupes',
-    'Petit-déjeuners',]
+    'jambons-de-paris',
+    'sandwichs',
+    'pizzas-et-tartes-surgelees',
+    'Vins',]
