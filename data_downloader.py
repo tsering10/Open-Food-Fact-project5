@@ -34,7 +34,7 @@ class Download_data():
             # get the count number of product 
             count = products["count"]
             # get the number of pages and get the required information 
-            url_page = math.ceil(count/20)
+            url_page = math.ceil(int(count)/20)
             print(url_page)
             # loop over each page 
             for x in range(1,url_page+1):
@@ -74,9 +74,9 @@ class Download_data():
 
         #change all NaN-values to None
 
-        df = df.where((pd.notnull(df)), None)
+        df_new = df.where((pd.notnull(df)), None)
 
-        return df 
+        return df_new
         
         
         #return data

@@ -9,12 +9,12 @@ from sqlalchemy import create_engine
 def connect():
     """ Connect to MySQL database """
     db_config = read_db_config()
-    dbName = 'test'
+    dbName = 'tashi'
     #conn = None
     
     
     try:
-        print('Connecting to MySQL database...')
+        #print('Connecting to MySQL database...')
         mysql_connection_url = f"mysql+mysqlconnector://root:{db_config['password']}@{db_config['host']}:3306/"
        
         mysql_engine = sqlalchemy.create_engine(mysql_connection_url)
@@ -28,7 +28,7 @@ def connect():
 
 
         if db_engine.connect():
-            print('Connection established')
+            #print('Connection established')
             #conn = db_engine.connect()
             return db_engine
         else:

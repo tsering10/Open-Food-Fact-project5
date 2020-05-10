@@ -1,5 +1,5 @@
 CATEGORIES_LIST = [
-    'jambons-de-paris',
+    'Thons',
     'sandwichs',
     'pizzas-et-tartes-surgelees',
     'Vins',]
