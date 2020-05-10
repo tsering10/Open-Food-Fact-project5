@@ -78,7 +78,18 @@
                           </table>
 
 
-                        <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+                        <!--                         <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a> -->
+        
+                          
+                       <!--Blue select-->
+                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                            <option selected>Choose one ...</option>
+                            {% for p in dico.values() %}
+                            <option value="1">{{p}}</option>
+                            {% endfor %}
+                        </select>
+                                                
+                          
                     </div>
                 </div>
             </div>
