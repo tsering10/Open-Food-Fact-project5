@@ -7,6 +7,7 @@ from tqdm import tqdm
 import math
 import time
 import os 
+from functools import reduce
 import numpy as np
 from datetime import datetime
 
@@ -45,23 +46,14 @@ class Download_data():
                 for i in range(0,len(products['products'])):
 
                     res = {}
-                    #res['main_category'] = category 
                     res['main_category'] = products['products'][i].get('pnns_groups_2')
                     res['code'] = products['products'][i].get('code')
                     res['url'] = products['products'][i].get('url')
                     res['product_name'] = products['products'][i].get('product_name')
-                    res['brand'] = products['products'][i].get('brands')
-                    res['language'] = products['products'][i].get('languages_tags')[0].split(':')[-1]
                     res['nutrition_grade_fr'] = products['products'][i].get('nutrition_grade_fr')
                     res['stores'] = products['products'][i].get('stores')
                     res['energy'] = products['products'][i]['nutriments'].get('energy_100g')
-                    res['fat'] = products['products'][i]['nutriments'].get('fat_100g')
-                    res['carbohydrates'] = products['products'][i]['nutriments'].get('carbohydrates_100g')
-                    res['sugars'] = products['products'][i]['nutriments'].get('sugars_100g')
-                    res['fiber'] = products['products'][i]['nutriments'].get('fiber_100g')
                     res['proteins'] = products['products'][i]['nutriments'].get('proteins_100g')
-                    res['salt'] = products['products'][i]['nutriments'].get('salt_100g')
-                    res['last_modified_t'] = products['products'][i].get('last_modified_t')
                     # append the dictionary to a list 
                     data.append(res)
         
@@ -69,17 +61,26 @@ class Download_data():
          # create a dataframe 
         df = pd.DataFrame(data)
 
-        # Change unix timestamp to human-readable date
-        df['last_modified_t'] = pd.to_datetime(df['last_modified_t'],unit='s').dt.strftime('%Y-%m-%d')
-
-        #change all NaN-values to None
-
-        df_new = df.where((pd.notnull(df)), None)
+        
+        # Clean some data as the data was not normalized. 
+        # In one of the columns i.e stores, a single cell had multiple comma seperated values.
+        df = df.replace({np.nan: None})
+        df = df.replace({None:"-" })
+        # We start with creating a new dataframe from the series with code as the index
+        df_store = pd.DataFrame(df.stores.str.split(",").tolist(),index=df.code).stack()
+        #We now want to get rid of the secondary index
+        # To do this, we will make code as a column 
+        df_store = df_store.reset_index([0, 'code'])
+        # The final step is to set the column names as we want them
+        df_store.columns = ['code', 'stores']
+        # merge the separate row dataframe with the original dataframe
+        df_new = df.merge(df_store, how='inner', left_on='code', right_on='code')
+        # select the needed columns
+        df_new = df_new[['main_category', 'code', 'url', 'product_name', 'nutrition_grade_fr','energy', 'proteins', 'stores_y']]
 
         return df_new
         
         
-        #return data
     
     def save_dataframe_csv(self,df):
         """save the dataframe as a csv file"""
@@ -90,14 +91,14 @@ class Download_data():
         if os.path.exists(dir):
                 print(dir + ' : exists and saving the file as open_food_data.csv')
                 # saving the file as a csv file 
-                df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8')
+                df.to_csv(dir+'/open_food_data1.csv',index=False,encoding='utf-8')
 
         else:
             os.mkdir(dir)
             #print(os.getcwd)
             # saving the file as csv file 
             print('saving the data as open_food_data.csv')
-            df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8')
+            df.to_csv(dir+'/open_food_data1.csv',index=False,encoding='utf-8')
 
 
 
