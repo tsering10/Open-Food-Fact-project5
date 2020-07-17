@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, Sequence, Float,PrimaryKeyConstraint, ForeignKey, DateTime,CHAR, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, backref
-from connect_mysql import connect
+from connect_mysql import connect 
 
 
 Base = declarative_base()
@@ -68,8 +68,32 @@ class Product(Base):
         self.nutrition_grade  = nutrition_grade 
         self.energy = energy 
         self.proteins = proteins
+
+
+class Favorite(Base):
+    __tablename__ = 'favorites'
+
+    id = Column(Integer, primary_key=True)
+    product_name = Column(String(500))
+    bar_code = Column(String(1500))
+    url = Column(String(2500))
+    nutrition_grade = Column(Integer)
+    energy = Column(Float)
+    proteins = Column(Float)
+    store_name = Column(String(200))
+     
+    def __init__(self, product_name, bar_code,url,nutrition_grade, energy,proteins,store_name):
+        self.product_name = product_name
+        self.bar_code = bar_code
+        self.url =  url
+        self.nutrition_grade  = nutrition_grade 
+        self.energy = energy 
+        self.proteins = proteins
+        self.store_name = store_name
         
         
+
+
 
 Base.metadata.create_all(connect())
 

@@ -29,8 +29,7 @@
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/category">Category</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/favorite">Favorite</a></li>
-
-                      </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -61,6 +60,7 @@
               <tbody>
                   {% for dict_item  in select_store %}
                 <tr>
+                    <!-- <td>{{loop.index0}}</td> -->
                     <td>{{loop.index0}}</td>
                     <td>{{dict_item.product_name}}</td>
                     <td>{{dict_item.bar_code}}</td>
@@ -68,7 +68,9 @@
                     <td>{{dict_item.nutrition_grade}}</td>
                     <td>{{dict_item.energy}}</td>
                     <td>{{dict_item.proteins}}</td>
+
                     <td>{{dict_item.store_name}}</td>
+            
                 </tr>
                 {% endfor %}
               </tbody>
@@ -82,53 +84,17 @@
 
  <!-- Product recommendation-->
 
-<section class="page-section" id="recommendation">
+<section class="page-section bg-primary" id="recommendation">
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-            <h2 class="text-black mt-0"> We recommend this product for you...</h2>
+            <h2 class="text-white mt-0"> We recommend this product for you...</h2>
             <hr class="divider light my-4" />
-
-            <table class="table table-dark table-wrapper-scroll-y my-custom-scrollbar">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Code</th>
-                  <th scope="col">Url</th>
-                  <th scope="col">Nutrition grade</th>
-                  <th scope="col">Energy</th>
-                  <th scope="col">Protein</th>
-                  <th scope="col">Store</th>
-                  
-                </tr>
-
-              </thead>
-              <tbody>
-                <tr>
-                   {% for dict_item  in better_product %}
-
-                    <td>{{dict_item[0]}}</td>
-                    <td>{{dict_item[1]}}</td>
-                    <td><a href={{dict_item[2]}} target="_blank"> {{dict_item[2]}}</a></td>
-                    <td>{{dict_item[3]}}</td>
-                    <td>{{dict_item[4]}}</td>
-                    <td>{{dict_item[5]}}</td>
-                    <td>{{dict_item[6]}}</td>
-                    {% endfor %}
-
-                 </tr>
-              </tbody>
-            </table>
+            <p>We don't have a better product in our database!!!!!!</p>
+            
         </div>
-        <form action="/favorite" method="post" role="form">
-         
-         <input class="btn btn-primary btn-xl js-scroll-trigger" input type="submit" name="submit_button" value="Do Something">Save our recommended product >></button>
- 
-</form>
     </div>
-
   </div>
-
 </section> 
 
  <!-- Footer-->

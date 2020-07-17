@@ -11,10 +11,14 @@ from functools import reduce
 import numpy as np
 from datetime import datetime
 
-from constants import *
 
 
 class Download_data():
+
+    """ 
+    This is a class for getting json data from openfoodfacts API. 
+       
+    """
     
     
     def download_json(self,CATEGORIES_LIST):
@@ -43,8 +47,8 @@ class Download_data():
                 r = requests.get(url_new)
                 products = r.json()
 
-                for i in range(0,len(products['products'])):
-
+                for i in range(len(products['products'])):
+                    # create a empty dictionary to store data
                     res = {}
                     res['main_category'] = products['products'][i].get('pnns_groups_2')
                     res['code'] = products['products'][i].get('code')
@@ -62,10 +66,9 @@ class Download_data():
         df = pd.DataFrame(data)
 
         
-        # Clean some data as the data was not normalized. 
+        # Clean some data as the data are not normalized. 
         # In one of the columns i.e stores, a single cell had multiple comma seperated values.
-        df = df.replace({np.nan: None})
-        df = df.replace({None:"-" })
+        df = df.replace({np.nan: "-"})
         # We start with creating a new dataframe from the series with code as the index
         df_store = pd.DataFrame(df.stores.str.split(",").tolist(),index=df.code).stack()
         #We now want to get rid of the secondary index
@@ -83,7 +86,13 @@ class Download_data():
         
     
     def save_dataframe_csv(self,df):
-        """save the dataframe as a csv file"""
+        """ 
+        The function to the dataframe as a csv file. 
+  
+        Parameters: 
+            df (dataframe): the dataframe to be saved. 
+           
+        """
         
         # get the current directory
         cwd = os.getcwd()
@@ -91,19 +100,24 @@ class Download_data():
         if os.path.exists(dir):
                 print(dir + ' : exists and saving the file as open_food_data.csv')
                 # saving the file as a csv file 
-                df.to_csv(dir+'/open_food_data1.csv',index=False,encoding='utf-8')
+                df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8-sig')
 
         else:
             os.mkdir(dir)
-            #print(os.getcwd)
             # saving the file as csv file 
             print('saving the data as open_food_data.csv')
-            df.to_csv(dir+'/open_food_data1.csv',index=False,encoding='utf-8')
+            df.to_csv(dir+'/open_food_data.csv',index=False,encoding='utf-8_sig')
 
 
 
 if __name__ == "__main__":
     t = Download_data()
+    CATEGORIES_LIST = [
+    'Bœuf',
+    'Flocons',
+    'Pizzas',
+    'Jus de fruits pur jus',]
+    
     d = t.download_json(CATEGORIES_LIST)
     t.save_dataframe_csv(d)
         
