@@ -6,6 +6,7 @@ from connect_mysql import connect
 
 Base = declarative_base()
 
+# Created a product_categorys_association table that connects rows of products and  category
 
 products_categorys_association = Table(
     'products_categorys', Base.metadata,
@@ -25,6 +26,7 @@ products_stores_association = Table(
 
 
 class Category(Base):
+    # create a table called categorys
     __tablename__ = 'categorys'
 
     id = Column(Integer, primary_key=True)
@@ -36,6 +38,7 @@ class Category(Base):
 
         
 class Store(Base):
+    # create a table called stores
     __tablename__ = 'stores'
 
     id = Column(Integer, primary_key=True)
@@ -46,6 +49,7 @@ class Store(Base):
         
 
 class Product(Base):
+    # create a table calle products
     __tablename__ = 'products'
 
     id = Column(Integer, primary_key=True, nullable=False)
@@ -71,6 +75,7 @@ class Product(Base):
 
 
 class Favorite(Base):
+    # create a table called favorites
     __tablename__ = 'favorites'
 
     id = Column(Integer, primary_key=True)
