@@ -91,7 +91,8 @@
               <select class="custom-select my-1 mr-sm-2"  name="productID">
                   <!-- <option selected>Choose one ...</option> -->
                   {%  for dict_item in all_product %}
-                  <option value="{{dict_item['code']}}">{{dict_item['code']}}: {{dict_item['name']}}</option>
+                  <option value="{{dict_item['code']}}">{{dict_item['code']}}:{{dict_item['name']}}</option>
+
                   {% endfor %}
               </select>
                <button type="submit" class="btn btn-danger">Submit</button>

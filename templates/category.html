@@ -48,9 +48,8 @@
                <!--Blue select-->
                <form action="/product_category" >
                 <select class="custom-select my-1 mr-sm-2" name="cat_id">
-                    <!-- <option selected>Choose one ...</option> -->
                     {% for dict_item in dico %}
-                    <option value="{{dict_item['id']}}">{{dict_item['name']}}</option>
+                    <option value="{{dict_item['categoryID']}}">{{dict_item['name']}}</option>
                     {% endfor %}
                 </select>
                  <button type="submit" class="btn btn-danger">Search</button>

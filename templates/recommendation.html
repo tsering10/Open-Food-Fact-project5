@@ -120,15 +120,21 @@
               </tbody>
             </table>
         </div>
-        <form action="/favorite" method="post" role="form">
-         
-         <input class="btn btn-primary btn-xl js-scroll-trigger" input type="submit" name="submit_button" value="Do Something">Save our recommended product >></button>
- 
-</form>
+  </div>
+        
+  <form action="/favorite" >
+    <select class="custom-select my-1 mr-sm-2"  name="barcode">
+        <!-- <option selected>Choose one ...</option> -->
+        {% for dict_item  in better_product %}
+        <option value="{{dict_item[1]}}">{{dict_item[0]}}</option>
+        {% endfor %}
+    </select>
+     <button type="submit" class="btn btn-primary center-block">Save our recommended product >></button>
+
     </div>
 
   </div>
-
+</form>
 </section> 
 
  <!-- Footer-->

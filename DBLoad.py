@@ -6,7 +6,7 @@ import numpy as np
 from util import Session,Get_unique_df_values, read_csv
 
 # create a Session
-session = Session()
+sess = Session()
 
 
 class DBFeed():
@@ -34,8 +34,8 @@ class DBFeed():
 
         for c in unique_category_list:
             cat = Category(category_name = c)
-            session.add(cat)
-            session.commit()
+            sess.add(cat)
+            sess.commit()
     
     def populate_store(self):
         """
@@ -47,8 +47,8 @@ class DBFeed():
 
         for store in unique_store_list:
             st = Store(store_name = store)
-            session.add(st)
-            session.commit()
+            sess.add(st)
+            sess.commit()
 
 
     def populate_product(self):
@@ -68,17 +68,17 @@ class DBFeed():
             store_names = row['stores_y']
 
             new_product = Product(product_name = product_name, bar_code = bar_code, url = url, nutrition_grade = nutrition_grade, energy = energy, proteins = proteins)
-            new_category = session.query(Category).filter(Category.category_name == category_names).first()
-            new_store = session.query(Store).filter(Store.store_name == store_names).first()
+            new_category = sess.query(Category).filter(Category.category_name == category_names).first()
+            new_store = sess.query(Store).filter(Store.store_name == store_names).first()
 
             if new_store is None:
                 new_store = Store(store_name = store_names)
-                session.add(new_store)
+                sess.add(new_store)
             new_product.categorys.append(new_category)
             new_product.stores.append(new_store)
-            session.add(new_product)
-            session.commit()
-            session.close()
+            sess.add(new_product)
+            sess.commit()
+            sess.close()
 
 
             
@@ -93,7 +93,7 @@ class DBFeed():
 #     dbfill.populate_category()
 #     dbfill.populate_store()
 #     dbfill.populate_product()
-#     print("loading done................")
+#     print("data successfully loaded")
 
 
 

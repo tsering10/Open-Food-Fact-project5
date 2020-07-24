@@ -25,4 +25,4 @@ def read_csv(file_name):
     grade = {'a': 1,'b': 2,"c":3,'d':4,'e':5,None:6} 
     df['nutrition_grade_fr'] = [grade[item] for item in df['nutrition_grade_fr']] 
 
-    return df
+    return df 
