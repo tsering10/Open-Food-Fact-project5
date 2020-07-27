@@ -69,7 +69,7 @@ def display_better(sess,product_id,cid):
                 products_categorys_association.c.product_id == Product.id).filter(products_categorys_association.c.category_id == Category.id).filter(
                 products_stores_association.c.product_id == Product.id).filter(products_stores_association.c.store_id == Store.id).filter(Category.id == cid).filter(Product.nutrition_grade < current_grade)
             return recomment_product.order_by(func.rand()).limit(1).all()
-           
+    return []      
 
 
 def insert_favorite(sess,better_product):
