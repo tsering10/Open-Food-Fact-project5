@@ -27,11 +27,11 @@ pip install virtualenv
 virtualenv mypython
 ```
 6. Activate the virtual environment. You can activate the python environment by running the following command:
-Linux and MAC
+Linux and MAC:
 ```bash
 source mypython/bin/activate
 ```
-Windows
+Windows:
 ```bash
 mypthon\Scripts\activate
 ```
