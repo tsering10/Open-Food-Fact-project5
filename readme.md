@@ -1,6 +1,6 @@
 # Project 5 OpenFoodFacts
 
-The goal of this project is to query the OpenFoodFacts API in order to populate a local SQL database (MySQL). A web interface is provided to search for products and better products are recommended. Users can save their recommended or substitute product in the database for later use. 
+The goal of this project is to query the OpenFoodFacts API in order to populate a local SQL database (MySQL). A web interface is provided to search for products and better products are recommended. Users can save their recommended  product in the database. 
 
 
 ## Installation
