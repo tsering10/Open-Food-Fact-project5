@@ -48,12 +48,12 @@ def recommendation():
 @app.route("/favorite",methods=['GET', 'POST']) 
 def favorite():
 
-    if not session.get("catID") is None:
-        cID = session.get("catID")
-        barcode = request.args.get("barcode")
-        better_product = display_better(sess, barcode,cID)
-        # calling function insert_favorite to save the recommended product in database
-        insert_favorite(sess,better_product)
+    # if not session.get("catID") is None:
+    #     cID = session.get("catID")
+    barcode = request.args.get("barcode")
+    better_product = Get_product_store(sess,barcode)
+    # calling function insert_favorite to save the recommended product in database
+    insert_favorite(sess,better_product)
         
     fav_products = display_favorite(sess)
 
