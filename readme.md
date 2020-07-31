@@ -7,11 +7,7 @@ The goal of this project is to query the OpenFoodFacts API in order to populate 
 # Python 
 Install from : https://www.python.org/downloads/
 Preferably choose Python 3.8.2 or above 
-Or you can follow the command below on your terminal to install library dependencies for the python code
 
-```bash
-pip  install -r requirements.txt
-```
 
 ## Database creation:
 
