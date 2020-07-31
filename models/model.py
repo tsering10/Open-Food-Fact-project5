@@ -1,7 +1,6 @@
-from sqlalchemy import create_engine, Column, Integer, String, Sequence, Float, PrimaryKeyConstraint, ForeignKey, \
-    DateTime, CHAR, Table
+from sqlalchemy import Column, Integer, String, Float, PrimaryKeyConstraint, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship, backref
+from sqlalchemy.orm import relationship
 from connect_mysql import connect
 
 Base = declarative_base()
