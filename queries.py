@@ -1,5 +1,5 @@
 from models.model import *
-from sqlalchemy.sql.expression import func, select
+from sqlalchemy.sql.expression import func
 
 
 def display_categories(sess):
