@@ -1,12 +1,10 @@
-from sqlalchemy import create_engine, Column, Integer, String, Sequence, Float,PrimaryKeyConstraint, ForeignKey, DateTime,CHAR, Table
+from sqlalchemy import create_engine, Column, Integer, String, Sequence, Float, PrimaryKeyConstraint, ForeignKey, \
+    DateTime, CHAR, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, backref
-from connect_mysql import connect 
-
+from connect_mysql import connect
 
 Base = declarative_base()
-
-# Created a product_categorys_association table that connects rows of products and  category
 
 products_categorys_association = Table(
     'products_categorys', Base.metadata,
@@ -14,7 +12,6 @@ products_categorys_association = Table(
     Column('product_id', Integer, ForeignKey('products.id')),
     PrimaryKeyConstraint('category_id', 'product_id'),
 )
-
 
 # Created a product_stores_association table that connects rows of products and rows of stores
 products_stores_association = Table(
@@ -26,30 +23,26 @@ products_stores_association = Table(
 
 
 class Category(Base):
-    # create a table called categorys
     __tablename__ = 'categorys'
 
     id = Column(Integer, primary_key=True)
     category_name = Column(String(500))
-    
 
     def __init__(self, category_name):
-        self.category_name =  category_name
+        self.category_name = category_name
 
-        
+
 class Store(Base):
-    # create a table called stores
     __tablename__ = 'stores'
 
     id = Column(Integer, primary_key=True)
     store_name = Column(String(200))
-     
+
     def __init__(self, store_name):
         self.store_name = store_name
-        
+
 
 class Product(Base):
-    # create a table calle products
     __tablename__ = 'products'
 
     id = Column(Integer, primary_key=True, nullable=False)
@@ -59,23 +52,20 @@ class Product(Base):
     nutrition_grade = Column(Integer)
     energy = Column(Float)
     proteins = Column(Float)
-   
+    # Relationships
+    categorys = relationship("Category", secondary=products_categorys_association)
+    stores = relationship("Store", secondary=products_stores_association)
 
-
-    categorys = relationship("Category", secondary = products_categorys_association)
-    stores = relationship("Store", secondary = products_stores_association)
-    
-    def __init__(self,product_name,bar_code,url,nutrition_grade,energy,proteins):
+    def __init__(self, product_name, bar_code, url, nutrition_grade, energy, proteins):
         self.product_name = product_name
         self.bar_code = bar_code
         self.url = url
-        self.nutrition_grade  = nutrition_grade 
-        self.energy = energy 
+        self.nutrition_grade = nutrition_grade
+        self.energy = energy
         self.proteins = proteins
 
 
 class Favorite(Base):
-    # create a table called favorites
     __tablename__ = 'favorites'
 
     id = Column(Integer, primary_key=True)
@@ -86,21 +76,15 @@ class Favorite(Base):
     energy = Column(Float)
     proteins = Column(Float)
     store_name = Column(String(200))
-     
-    def __init__(self, product_name, bar_code,url,nutrition_grade, energy,proteins,store_name):
+
+    def __init__(self, product_name, bar_code, url, nutrition_grade, energy, proteins, store_name):
         self.product_name = product_name
         self.bar_code = bar_code
-        self.url =  url
-        self.nutrition_grade  = nutrition_grade 
-        self.energy = energy 
+        self.url = url
+        self.nutrition_grade = nutrition_grade
+        self.energy = energy
         self.proteins = proteins
         self.store_name = store_name
-        
-        
-
 
 
 Base.metadata.create_all(connect())
-
-
-
