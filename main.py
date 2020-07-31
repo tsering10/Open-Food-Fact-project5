@@ -1,7 +1,7 @@
 from queries import display_categories, display_products, get_product_store, display_better, insert_favorite, \
     display_favorite
 from DBLoad import sess
-from flask import Flask, render_template, request, flash, session
+from flask import Flask, render_template, request, session
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
