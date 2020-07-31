@@ -38,6 +38,13 @@ pip install -r requirements.txt
 ```
 ## Usage
 
+To download the data from the openfoodfacts API, you can run the following script and it will download the data in csv format.
+```bash
+python3 data_downloader.py
+```
+You can use the script DBLoad.py to insert data into the MYSQL database. 
+
+
 To run this project, clone this repo (or fork, which you'll want to do eventually).
 
 In a separate terminal, to run the command below
