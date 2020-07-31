@@ -43,5 +43,5 @@ To run this project, clone this repo (or fork, which you'll want to do eventuall
 In a separate terminal, to run the command below
 
 ```bash
-python3 main.py
+python3 main.py script on your browser, open the URL localhost: 5000
 ```
